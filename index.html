@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Engagement Predictor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>🚀 SM Predictor</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-section="prediction">
+                    📊 Make Prediction
+                </button>
+                <button class="nav-btn" data-section="explorer">
+                    📈 Data Explorer
+                </button>
+                <button class="nav-btn" data-section="insights">
+                    🔍 Model Insights
+                </button>
+            </nav>
+        </div>
+
+        
+        <main class="main-content">
+            
+            <header class="app-header">
+                <h1>🚀 Social Media Engagement Predictor</h1>
+                <p class="subtitle">Predict engagement for your social media posts using machine learning</p>
+                <p class="description">Get accurate predictions based on platform, content type, timing, and trending status using our ElasticNet regression model.</p>
+            </header>
+
+            
+            <section id="prediction-section" class="content-section active">
+                <div class="section-container">
+                    <h2>Make a Prediction</h2>
+                    
+                    
+                    <div class="presets-section">
+                        <h3>📋 Quick Examples</h3>
+                        <p class="preset-description">Try these top-performing post examples:</p>
+                        <div class="preset-buttons">
+                            <button class="btn btn--secondary preset-btn" data-preset="0">
+                                Facebook Video (6,410 engagement)
+                            </button>
+                            <button class="btn btn--secondary preset-btn" data-preset="1">
+                                Facebook Poll (6,222 engagement)
+                            </button>
+                            <button class="btn btn--secondary preset-btn" data-preset="2">
+                                Instagram Video (6,198 engagement)
+                            </button>
+                        </div>
+                    </div>
+
+                    
+                    <form id="prediction-form" class="prediction-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Platform</label>
+                                <select id="platform" class="form-control" required>
+                                    <option value="">Select Platform</option>
+                                    <option value="Facebook">Facebook</option>
+                                    <option value="Instagram">Instagram</option>
+                                    <option value="Twitter">Twitter</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Post Type</label>
+                                <select id="post_type" class="form-control" required>
+                                    <option value="">Select Type</option>
+                                    <option value="carousel">Carousel</option>
+                                    <option value="image">Image</option>
+                                    <option value="poll">Poll</option>
+                                    <option value="text">Text</option>
+                                    <option value="video">Video</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Trending Status</label>
+                                <select id="trending" class="form-control" required>
+                                    <option value="">Select Status</option>
+                                    <option value="maybe">Maybe</option>
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Month</label>
+                                <input type="range" id="month" class="slider" min="1" max="12" value="6">
+                                <div class="slider-value">Month: <span id="month-value">6</span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Day</label>
+                                <input type="range" id="day" class="slider" min="1" max="31" value="15">
+                                <div class="slider-value">Day: <span id="day-value">15</span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Weekday</label>
+                                <select id="weekday" class="form-control" required>
+                                    <option value="">Select Day</option>
+                                    <option value="0">Monday</option>
+                                    <option value="1">Tuesday</option>
+                                    <option value="2">Wednesday</option>
+                                    <option value="3">Thursday</option>
+                                    <option value="4">Friday</option>
+                                    <option value="5">Saturday</option>
+                                    <option value="6">Sunday</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Hour</label>
+                                <input type="range" id="hour" class="slider" min="0" max="23" value="12">
+                                <div class="slider-value">Time: <span id="hour-value">12:00</span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Minute</label>
+                                <input type="range" id="minute" class="slider" min="0" max="59" value="30">
+                                <div class="slider-value">Minute: <span id="minute-value">30</span></div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn--primary btn--lg">
+                                🔮 Predict Engagement
+                            </button>
+                        </div>
+                    </form>
+
+                    
+                    <div id="prediction-results" class="prediction-results hidden">
+                        <h3>Prediction Results</h3>
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <h4>Predicted Engagement</h4>
+                                <div class="engagement-value" id="predicted-engagement">-</div>
+                            </div>
+                            <div class="result-card">
+                                <h4>Confidence Level</h4>
+                                <div class="confidence-value" id="confidence-level">-</div>
+                            </div>
+                            <div class="result-card">
+                                <h4>Performance Category</h4>
+                                <div class="category-value" id="performance-category">-</div>
+                            </div>
+                        </div>
+                        <div class="explanation">
+                            <h4>💡 Explanation</h4>
+                            <p id="prediction-explanation">-</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section id="explorer-section" class="content-section">
+                <div class="section-container">
+                    <h2>📈 Data Explorer</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Total Posts</h3>
+                            <div class="stat-value">100</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Avg Engagement</h3>
+                            <div class="stat-value">3,000</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Max Engagement</h3>
+                            <div class="stat-value">6,410</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Min Engagement</h3>
+                            <div class="stat-value">435</div>
+                        </div>
+                    </div>
+
+                    <div class="charts-container">
+                        <div class="chart-card">
+                            <h3>Engagement by Platform</h3>
+                            <div id="platform-chart"></div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>Engagement by Post Type</h3>
+                            <div id="post-type-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section id="insights-section" class="content-section">
+                <div class="section-container">
+                    <h2>🔍 Model Insights</h2>
+                    
+                    <div class="model-info-grid">
+                        <div class="info-card">
+                            <h3>Model Type</h3>
+                            <p>ElasticNet Regression</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>R² Score</h3>
+                            <p>0.2624</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>Features Used</h3>
+                            <p>17 features</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>Training Samples</h3>
+                            <p>100 posts</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-importance">
+                        <h3>Feature Importance</h3>
+                        <div id="feature-importance-chart"></div>
+                    </div>
+
+                    <div class="model-explanation">
+                        <h3>About the Model</h3>
+                        <p>This ElasticNet regression model combines L1 and L2 regularization to predict social media engagement. It analyzes various factors including platform, post type, timing, and trending status to provide accurate predictions.</p>
+                        <ul>
+                            <li><strong>Platform:</strong> Different social media platforms have varying engagement patterns</li>
+                            <li><strong>Content Type:</strong> Videos and polls tend to generate higher engagement</li>
+                            <li><strong>Timing:</strong> Hour, day of week, and seasonal patterns affect visibility</li>
+                            <li><strong>Trending Status:</strong> Content alignment with trends impacts reach</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
