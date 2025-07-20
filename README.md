@@ -4,6 +4,10 @@ A sleek Streamlit web app that predicts the expected **engagement rate (%)** for
 
 ---
 
+## 🔗 Live Demo
+
+👉 [Try the App](https://sm-engagement-predictor.streamlit.app)
+
 ## 🚀 Features
 
 - Predicts engagement for **Facebook**, **Instagram**, and **Twitter**
