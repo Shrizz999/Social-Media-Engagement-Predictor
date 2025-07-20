@@ -90,7 +90,7 @@ st.sidebar.markdown("""
 <h3 style="color: #FF6E40;">About</h3>
 <p>Predict social-media engagement based on:</p>
 <ul>
-  <li><strong>Platform</strong> (Facebook, Instagram, Twitter)</li>
+  <li><strong>Platform</strong> (Facebook, Instagram, X)</li>
   <li><strong>Post type</strong> (carousel, image, poll, text, video)</li>
   <li><strong>Trending status</strong></li>
   <li><strong>Scheduled date & time</strong></li>
@@ -119,7 +119,7 @@ with st.form("prediction_form"):
     center_col = st.columns(3)[1]
 
     with center_col:
-        platform = st.selectbox("📱 Platform", ['Facebook', 'Instagram', 'Twitter'])
+        platform = st.selectbox("📱 Platform", ['Facebook', 'Instagram', 'X'])
         post_type = st.selectbox("🖼️ Post Type", ['carousel', 'image', 'poll', 'text', 'video'])
         trending = st.selectbox("🔥 Trending", ['maybe', 'no', 'yes'])
         post_date = st.date_input("📅 Post Date", value=date.today())
@@ -143,7 +143,7 @@ if submitted:
 
         feats = {
             'platform_Instagram': int(platform == 'Instagram'),
-            'platform_Twitter': int(platform == 'Twitter'),
+            'platform_Twitter': int(platform == 'X'),
             'post_type_image': int(post_type == 'image'),
             'post_type_poll': int(post_type == 'poll'),
             'post_type_text': int(post_type == 'text'),
