@@ -91,7 +91,7 @@ st.sidebar.markdown("""
 <p>Predict social-media engagement based on:</p>
 <ul>
   <li><strong>Platform</strong> (Facebook, Instagram, X)</li>
-  <li><strong>Post type</strong> (carousel, image, poll, text, video)</li>
+  <li><strong>Post type</strong> (Carousel, Image, Poll, Text, Video)</li>
   <li><strong>Trending status</strong></li>
   <li><strong>Scheduled date & time</strong></li>
 </ul>
@@ -120,8 +120,8 @@ with st.form("prediction_form"):
 
     with center_col:
         platform = st.selectbox("📱 Platform", ['Facebook', 'Instagram', 'X'])
-        post_type = st.selectbox("🖼️ Post Type", ['carousel', 'image', 'poll', 'text', 'video'])
-        trending = st.selectbox("🔥 Trending", ['maybe', 'no', 'yes'])
+        post_type = st.selectbox("🖼️ Post Type", ['Carousel', 'Image', 'Poll', 'Text', 'Video'])
+        trending = st.selectbox("🔥 Trending", ['Maybe', 'No', 'Yes'])
         post_date = st.date_input("📅 Post Date", value=date.today())
         post_time = st.time_input("🕒 Post Time", value=datetime.now().time().replace(second=0, microsecond=0))
         submitted = st.form_submit_button("🚀 Predict Engagement")
